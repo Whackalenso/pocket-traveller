@@ -13,16 +13,71 @@ struct Animation {
 
 enum Activity { REST, WALK, SLEEP };
 
-static const uint8_t rest0_xbm[] = {0,0,0,0,0,0,0,0,224,7,16,8,40,20,136,17,152,25,8,16,8,16,208,11,32,4,0,0,0,0,0,0};
-static const uint8_t* const restFrames[] = {rest0_xbm};
-static const Animation ANIM_REST = {restFrames, 1, 16, 16, 150, true};
+// Every animation a single rank owns. Sizes are per-animation, so ranks
+// (and the states inside one rank) may differ in w/h.
+struct RankSprites {
+  const Animation* rest;
+  const Animation* walk;
+  const Animation* sleep;   // nullptr when this rank has no sleep art
+};
 
-static const uint8_t sleep0_xbm[] = {7,0,4,0,2,0,1,0,23,0,0,0,32,62,0,73,128,130,128,66,128,64,128,72,128,66,128,130,0,73,0,62};
-static const uint8_t* const sleepFrames[] = {sleep0_xbm};
-static const Animation ANIM_SLEEP = {sleepFrames, 1, 16, 16, 150, true};
+// 1 only when every rank has sleep_*.png. The sketch reads this to decide
+// whether the idle-sleep animation exists at all -- drop sleep frames into
+// each art/<rank>/ folder, re-run gen_sprites.py, and the feature is back.
+#define SPRITES_HAVE_SLEEP 0
 
-static const uint8_t walk0_xbm[] = {0,0,0,0,0,0,224,7,16,8,40,20,136,17,158,113,8,16,8,16,208,11,32,10,0,4,0,0,0,0,0,0};
-static const uint8_t walk1_xbm[] = {0,0,0,0,0,0,224,7,16,8,40,20,136,17,142,121,8,16,8,16,208,11,80,4,32,0,0,0,0,0,0,0};
-static const uint8_t* const walkFrames[] = {walk0_xbm,walk1_xbm};
-static const Animation ANIM_WALK = {walkFrames, 2, 16, 16, 150, true};
+// ---- chud --------------------------------------------------------
+static const uint8_t chud_rest0_xbm[] = {0,0,0,0,0,0,0,0,0,0,0,0,192,15,0,224,31,0,252,63,0,8,64,0,36,144,0,2,7,1,2,1,1,2,0,1,1,0,2,2,0,1,2,0,1,12,192,0,176,55,0,64,8,0};
+static const uint8_t chud_rest1_xbm[] = {0,0,0,0,0,0,0,0,0,0,0,0,192,15,0,224,31,0,252,63,0,8,64,0,36,144,0,2,7,1,2,1,1,2,0,1,1,0,2,2,0,1,2,0,1,12,192,0,176,55,0,64,8,0};
+static const uint8_t chud_rest2_xbm[] = {0,0,0,0,0,0,0,0,0,0,0,0,192,15,0,224,31,0,252,63,0,8,64,0,36,144,0,2,7,1,2,1,1,2,0,1,1,0,2,2,0,1,2,0,1,12,192,0,176,55,0,64,8,0};
+static const uint8_t chud_rest3_xbm[] = {0,0,0,0,0,0,0,0,0,0,0,0,192,15,0,224,31,0,252,63,0,8,64,0,36,144,0,2,7,1,2,1,1,2,0,1,1,0,2,2,0,1,2,0,1,12,192,0,176,55,0,64,8,0};
+static const uint8_t chud_rest4_xbm[] = {0,0,0,0,0,0,0,0,0,0,0,0,192,15,0,224,31,0,252,63,0,8,64,0,36,144,0,2,7,1,2,3,1,2,2,1,1,4,2,2,4,1,2,2,1,12,192,0,176,55,0,64,8,0};
+static const uint8_t chud_rest5_xbm[] = {0,0,0,0,0,0,0,0,0,0,0,0,192,15,0,224,31,0,252,63,0,8,64,0,36,144,0,2,7,1,2,7,1,2,2,1,1,4,2,2,6,1,2,2,1,12,192,0,176,55,0,64,8,0};
+static const uint8_t chud_rest6_xbm[] = {0,0,0,0,0,0,0,0,0,0,0,0,192,15,0,224,31,0,252,63,0,8,64,0,36,144,0,2,7,1,2,1,1,2,6,1,1,2,2,2,4,1,2,2,1,12,192,0,176,55,0,64,8,0};
+static const uint8_t chud_rest7_xbm[] = {0,0,0,0,0,0,0,0,0,0,0,0,192,15,0,224,31,0,252,63,0,8,64,0,36,144,0,2,7,1,2,1,1,2,0,1,1,0,2,2,4,1,2,6,1,12,194,0,176,55,0,64,8,0};
+static const uint8_t* const chud_restFrames[] = {chud_rest0_xbm,chud_rest1_xbm,chud_rest2_xbm,chud_rest3_xbm,chud_rest4_xbm,chud_rest5_xbm,chud_rest6_xbm,chud_rest7_xbm};
+static const Animation ANIM_CHUD_REST = {chud_restFrames, 8, 18, 18, 300, true};
+
+static const uint8_t chud_walk0_xbm[] = {0,0,0,0,0,0,0,0,0,192,15,0,224,31,0,252,63,0,8,64,0,36,144,0,2,3,1,2,1,1,2,0,2,1,0,1,2,0,1,2,0,1,12,192,0,176,55,0,160,8,0,64,0,0};
+static const uint8_t chud_walk1_xbm[] = {0,0,0,0,0,0,0,0,0,192,15,0,224,31,0,252,63,0,8,64,0,36,144,0,2,3,1,2,1,1,1,0,1,2,0,2,2,0,1,2,0,1,12,192,0,176,55,0,64,20,0,0,8,0};
+static const uint8_t* const chud_walkFrames[] = {chud_walk0_xbm,chud_walk1_xbm};
+static const Animation ANIM_CHUD_WALK = {chud_walkFrames, 2, 18, 18, 300, true};
+
+// ---- pleb --------------------------------------------------------
+static const uint8_t pleb_rest0_xbm[] = {0,0,240,15,248,31,255,63,255,127,6,96,2,64,2,64,2,64,10,64,3,200,50,64,230,51,12,24,248,15,32,2};
+static const uint8_t pleb_rest1_xbm[] = {240,15,248,31,255,63,255,127,6,96,2,64,2,64,2,64,10,64,2,72,50,192,231,51,12,24,248,15,32,2,32,2};
+static const uint8_t pleb_rest2_xbm[] = {240,15,248,31,255,63,255,127,6,96,2,64,2,64,2,64,10,64,2,72,50,64,231,243,12,24,248,15,32,2,32,2};
+static const uint8_t pleb_rest3_xbm[] = {240,15,248,31,255,63,255,127,6,96,2,64,2,64,2,64,10,64,2,72,50,64,231,243,12,24,248,15,32,2,32,2};
+static const uint8_t pleb_rest4_xbm[] = {0,0,240,15,248,31,255,63,255,127,6,96,2,64,2,64,2,64,10,64,2,72,50,192,231,115,12,24,248,15,32,2};
+static const uint8_t pleb_rest5_xbm[] = {0,0,240,15,248,31,255,63,255,127,6,96,2,64,2,64,2,64,10,64,2,72,50,64,231,243,12,24,248,15,32,2};
+static const uint8_t* const pleb_restFrames[] = {pleb_rest0_xbm,pleb_rest1_xbm,pleb_rest2_xbm,pleb_rest3_xbm,pleb_rest4_xbm,pleb_rest5_xbm};
+static const Animation ANIM_PLEB_REST = {pleb_restFrames, 6, 16, 16, 300, true};
+
+static const uint8_t pleb_walk0_xbm[] = {240,15,248,31,252,63,254,127,6,96,6,96,2,64,2,64,18,64,2,72,50,192,231,51,12,24,248,15,32,2,0,2};
+static const uint8_t pleb_walk1_xbm[] = {240,15,248,31,252,63,254,127,6,96,6,96,2,64,2,64,18,64,2,72,51,64,230,243,12,24,248,15,32,2,32,0};
+static const uint8_t* const pleb_walkFrames[] = {pleb_walk0_xbm,pleb_walk1_xbm};
+static const Animation ANIM_PLEB_WALK = {pleb_walkFrames, 2, 16, 16, 300, true};
+
+// ---- nomad -------------------------------------------------------
+static const uint8_t nomad_rest0_xbm[] = {0,0,0,0,128,127,64,192,64,128,240,143,248,159,255,191,255,191,6,176,2,160,2,160,2,160,10,162,2,160,2,176,228,147,4,152,248,143,62,150,51,150,63,150,51,150,50,150,50,150,18,212,18,120,18,80,34,72,194,71,226,71,226,7};
+static const uint8_t nomad_rest1_xbm[] = {0,0,0,0,128,127,64,192,64,128,240,143,248,159,255,191,255,191,6,176,2,160,2,160,2,160,34,164,2,160,2,176,228,147,4,152,248,143,62,150,51,150,63,150,51,150,50,150,50,150,18,212,18,120,18,80,34,72,194,71,226,71,226,7};
+static const uint8_t nomad_rest2_xbm[] = {0,0,0,0,128,127,64,192,64,128,240,143,248,159,255,191,255,191,6,176,2,160,2,160,2,160,34,164,2,160,2,176,4,145,4,152,248,143,62,150,51,150,63,150,51,150,50,150,50,150,18,212,18,120,18,80,34,72,194,71,226,71,226,7};
+static const uint8_t nomad_rest3_xbm[] = {0,0,0,0,128,127,64,192,64,128,240,143,248,159,255,191,255,191,6,176,2,160,66,164,2,160,2,160,2,160,2,176,4,145,4,152,248,143,62,150,51,150,63,150,51,150,50,150,50,150,18,212,18,120,18,80,34,72,194,71,226,71,226,7};
+static const uint8_t nomad_rest4_xbm[] = {0,0,0,0,128,127,64,192,64,128,240,143,248,159,255,191,255,191,6,176,2,160,18,162,2,160,2,160,2,160,2,176,4,145,4,152,248,143,62,150,51,150,63,150,51,150,50,150,50,150,18,212,18,120,18,80,34,72,194,71,226,71,226,7};
+static const uint8_t* const nomad_restFrames[] = {nomad_rest0_xbm,nomad_rest1_xbm,nomad_rest2_xbm,nomad_rest3_xbm,nomad_rest4_xbm};
+static const Animation ANIM_NOMAD_REST = {nomad_restFrames, 5, 16, 32, 1000, true};
+
+static const uint8_t nomad_walk0_xbm[] = {0,0,0,0,0,0,128,127,64,192,64,128,240,143,248,159,255,191,255,191,6,176,2,160,2,160,2,160,10,161,2,160,2,176,100,144,4,156,248,143,54,150,59,150,55,150,51,150,50,150,50,150,18,212,18,120,18,80,98,72,242,71,114,71,2,7};
+static const uint8_t nomad_walk1_xbm[] = {0,0,0,0,0,0,128,127,64,192,64,128,240,143,248,159,255,191,255,191,6,176,2,160,2,160,2,160,18,162,2,160,2,176,100,144,4,156,254,143,51,150,63,150,51,150,50,150,50,150,50,150,18,212,18,120,18,80,162,79,194,67,226,131,226,0};
+static const uint8_t* const nomad_walkFrames[] = {nomad_walk0_xbm,nomad_walk1_xbm};
+static const Animation ANIM_NOMAD_WALK = {nomad_walkFrames, 2, 16, 33, 300, true};
+
+// Indexed by `enum Rank` -- keep this order in step with the sketch,
+// which static_asserts on RANK_SPRITE_COUNT. Order: chud, pleb, nomad.
+static const RankSprites RANK_SPRITES[] = {
+  {&ANIM_CHUD_REST, &ANIM_CHUD_WALK, nullptr},   // chud
+  {&ANIM_PLEB_REST, &ANIM_PLEB_WALK, nullptr},   // pleb
+  {&ANIM_NOMAD_REST, &ANIM_NOMAD_WALK, nullptr},   // nomad
+};
+static const uint8_t RANK_SPRITE_COUNT = 3;
 

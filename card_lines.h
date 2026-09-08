@@ -1,0 +1,13 @@
+"milo is reading feminist literature",
+"milo is arguing with strangers online",
+"milo is drafting a strongly worded email",
+"milo is pretending to read",
+"milo is practicing his handshake",
+"milo is looking for his other sock",
+"milo is workshopping his memoir",
+"milo is learning the bass",
+"milo started getting into piano/photography/fishing/lifting/painting to get over his boredom",
+"milo is journaling",
+"milo wants to go on a hike",
+"milo is watching Seinfeld",
+"milo is making lasagna"
