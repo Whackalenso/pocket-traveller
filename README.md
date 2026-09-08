@@ -6,8 +6,8 @@ The primary feature of the device is a screen that displays an avatar named Milo
 
 > *The name Milo comes from the famous ancient Greek athlete, Milo of Croton. Legend has it that he would lift a newborn ox on his shoulders every day, and as the ox grew bigger, so would he. In the same way, Milo's level and state is dependent on you, as if you were the ox.*
 
-<img src="media/photoshoot1.jpeg" height=500>
-<img src="media/photoshoot2.jpeg" height=500>
+<img src="media/photoshoot1.png" height=500>
+<img src="media/photoshoot2.JPG" height=500>
 
 ## Hardware
 
