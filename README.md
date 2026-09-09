@@ -123,8 +123,8 @@ In addition to displaying your status at the top of the screen, Milo will also l
 
 | | Chud | Pleb | Nomad |
 | :---: | :---:  | :---:  | :---:   |
-| **Rest** | <img src="media/animations/chud_rest.gif" style="image-rendering: pixelated;" width=112.5>| <img src="media/animations/pleb_rest.gif" style="image-rendering: pixelated;" width=100> | <img src="media/animations/nomad_rest.gif" style="image-rendering: pixelated;" width=100> |
-| **Walk** | <img src="media/animations/chud_walk.gif" style="image-rendering: pixelated;" width=112.5>| <img src="media/animations/pleb_walk.gif" style="image-rendering: pixelated;" width=100> | <img src="media/animations/nomad_walk.gif" style="image-rendering: pixelated;" width=100> |
+| **Rest** | <img src="media/animations/chud_rest.gif">| <img src="media/animations/pleb_rest.gif" > | <img src="media/animations/nomad_rest.gif"> |
+| **Walk** | <img src="media/animations/chud_walk.gif" style="image-rendering: pixelated;" width=112.5>| <img src="media/animations/pleb_walk.gif" > | <img src="media/animations/nomad_walk.gif" > |
 
 #### Dialogues
 
