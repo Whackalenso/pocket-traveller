@@ -2,12 +2,12 @@
 
 This is a Tamagotchi-inspired gadget to keep in your backpack, on your keychain, or in your pocket that encourages you to move more throughout your day.
 
+<img src="media/photoshoot1.png" height=500>
+<img src="media/photoshoot2.JPG" height=500>
+
 The primary feature of the device is a screen that displays an avatar named Milo. Milo will walk when you walk, rest when you're idle, and sleep during long periods of inactivity. Milo will gain **XP** the more he moves, filling up a bar at the top of the screen. When this bar fills, Milo will gain a **level**. In addition to **level**, Milo will also become a **chud**, **plebian**, or **nomad** dependent on how much he has moved in the past few days. *Skip to [Interface Design and Art](#5-interface-design-and-art) for more details*
 
 > *The name Milo comes from the famous ancient Greek athlete, Milo of Croton. Legend has it that he would lift a newborn ox on his shoulders every day, and as the ox grew bigger, so would he. In the same way, Milo's level and state is dependent on you, as if you were the ox.*
-
-<img src="media/photoshoot1.png" height=500>
-<img src="media/photoshoot2.JPG" height=500>
 
 ## Hardware
 
@@ -45,6 +45,8 @@ Given all this, we needed to come up with thresholds for these two qualities in 
 4. Created a Python script that plotted out all the data on a graph and automatically recommended thresholds for both qualities
 
 *Recording running and driving data*
+
+https://github.com/user-attachments/assets/42bd3670-7c9c-4e70-9289-1710ddce6e91
 
 <img src="media/car_calibration.jpeg" width=400>
 
