@@ -46,7 +46,9 @@ Given all this, we needed to come up with thresholds for these two qualities in 
 
 *Recording running and driving data*
 
-https://github.com/user-attachments/assets/42bd3670-7c9c-4e70-9289-1710ddce6e91
+https://github.com/user-attachments/assets/422ddd09-90e0-466a-b9c1-0ad0e3300164
+
+
 
 <img src="media/car_calibration.jpeg" width=400>
 
